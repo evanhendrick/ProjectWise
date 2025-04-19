@@ -64,9 +64,9 @@ const authSlice = createSlice({
         state.isAuthenticated = false;
         state.error = action.payload;
       })
-      .addCase(submitSignup.fulfilled, (state, action) => {
-        state.error = action.payload.message;
-      })
+      // .addCase(submitSignup.fulfilled, (state, action) => {
+      //   // state.error = action.payload.message;
+      // })
       .addCase(submitSignup.rejected, (state, action) => {
         state.error = action.payload.response.data.message;
       });

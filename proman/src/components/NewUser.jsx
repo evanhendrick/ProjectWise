@@ -39,33 +39,30 @@ export const NewUser = () => {
     } else {
       console.log("no errors to reset");
     }
-    // authState.error = null;
   };
 
   return (
-    <div className="container">
-      <Link to="/">Home</Link>
-      <div className="row">
-        <div className="col-3"></div>
-        <div className="col-6">
-          <h3>Welcome to Momentum Hub!</h3>
-        </div>
+    <div className="min-h-screen flex items-center justify-center bg-gray-100 px-4">
+      <div className="w-full max-w-sm md:max-w-md lg:max-w-lg bg-white rounded-xl shadow-md p-6 md:p-10">
+        <div className="mb-4 text-center">
+      <button
+      onClick={() => {
+        navigate('/')
+      }}
+      className="w-full bg-blue-600 text-white py-2 rounded-lg text-sm md:text-base hover:bg-blue-700 transition">Home</button>
+      <h2 className="text-xl md:text-2xl font-bold mt-4 text-gray-800">Welcome to Momentum Hub</h2>
       </div>
-      <div className="row">
-        <div className="col-3"></div>
-        <div className="col-6">
           <form
-            className="form-control"
+            className="space-y-4"
             onSubmit={handleSubmit(onSubmit)}
             noValidate
           >
-            <h5>Create your account:</h5>
-            <div className="mb-3">
-              <label for="username" className="form-label">
-                Create a Username
+            <div>
+              <label for="username" className="block text-sm md:text-base mb-1 font-medium text-gray-700">
+              Username
               </label>
               <input
-                className="form-control"
+                className="w-full px-4 py-2 border rounded-lg text-sm md:text-base focus:outline-none focus:ring-2 focus:ring-blue-500"
                 type="text"
                 id="username"
                 {...register("username", {
@@ -88,19 +85,19 @@ export const NewUser = () => {
                 }}
               ></input>
               {errors.username ? (
-                <p className="alert alert-danger">{errors.username?.message}</p>
+                <p className="text-red-500 text-sm mt-1">{errors.username?.message}</p>
               ) : null}
               {authState.error ? (
-                <p className="alert alert-danger">{authState.error}</p>
+                <p className="text-red-500 text-sm mt-1">{authState.error}</p>
               ) : null}
             </div>
 
-            <div className="mb-3">
-              <label for="password" className="form-label">
+            <div>
+              <label for="password" className="block text-sm md:text-base mb-1 font-medium text-gray-700">
                 Password
               </label>
               <input
-                className="form-control"
+                className="w-full px-4 py-2 border rounded-lg text-sm md:text-base focus:outline-none focus:ring-2 focus:ring-blue-500"
                 type="password"
                 id="password"
                 {...register("password", {
@@ -111,16 +108,13 @@ export const NewUser = () => {
                 })}
               ></input>
               {errors.password ? (
-                <p className="alert alert-danger">{errors.password?.message}</p>
+                <p className="text-red-500 text-sm mt-1">{errors.password?.message}</p>
               ) : null}
             </div>
 
-            <button className="btn btn-success">Submit</button>
-
-            <div className="mb-3" style={{ marginTop: "50px" }}></div>
+            <button type="submit" className="w-full bg-green-600 text-white py-2 rounded-lg text-sm md:text-base hover:bg-green-700 transition">Submit</button>
           </form>
-        </div>
       </div>
-    </div>
+      </div>
   );
 };
