@@ -6,6 +6,7 @@ import { submitSignin } from "../app/slices/authSlice";
 import { Link } from "react-router-dom";
 import _ from "lodash";
 import { authActions } from "../app/slices/authSlice";
+import { FaUserPlus } from 'react-icons/fa'
 
 export default function Signup() {
   const form = useForm();
@@ -45,92 +46,55 @@ export default function Signup() {
   };
 
   return (
-    <div className="container">
-      <div className="row">
-        <div className="col-3"></div>
-        <div className="col-6">
-          <h3>Welcome to Momentum Hub!</h3>
-        </div>
+    <div className="min-h-screen flex items-center justify-center bg-gray-100 px-4">
+  <div className="w-full max-w-sm md:max-w-md lg:max-w-lg bg-white rounded-xl shadow-md p-6 md:p-10">
+    <h2 className="text-xl md:text-2xl font-bold mb-6 text-center text-gray-800">
+      Welcome to Momentum Hub
+    </h2>
+
+    <form onSubmit={handleSubmit(onSubmit)} noValidate className="space-y-4">
+      {/* username */}
+      <div>
+        <label htmlFor="username" className="block text-sm md:text-base mb-1 font-medium text-gray-700">
+          Username
+        </label>
+        <input
+          {...register("username")}
+          className="w-full px-4 py-2 border rounded-lg text-sm md:text-base focus:ring-2 focus:ring-blue-500"
+        />
       </div>
-      <div className="row">
-        <div className="col-3"></div>
-        <div className="col-6">
-          <form
-            className="form-control"
-            onSubmit={handleSubmit(onSubmit)}
-            noValidate
-          >
-            <h5>Login:</h5>
 
-            <div className="mb-3">
-              <label htmlFor="username" className="form-label">
-                Username
-              </label>
-              <input
-                className="form-control"
-                type="text"
-                id="username"
-                {...register("username", {
-                  required: {
-                    value: true,
-                    message: "Must enter a username",
-                  },
-                  validate: {
-                    notAdmin: (fieldValue) => {
-                      return (
-                        fieldValue !== "admin" ||
-                        "You cannot have this username"
-                      );
-                    },
-                  },
-                })}
-                onChange={(e) => {
-                  register("username").onChange(e);
-                  handleClearErrors();
-                }}
-              ></input>
-              {errors.username ? (
-                <p className="alert alert-danger">{errors.username?.message}</p>
-              ) : null}
-            </div>
-
-            <div className="mb-3">
-              <label htmlFor="password" className="form-label">
-                Password
-              </label>
-              <input
-                className="form-control"
-                type="password"
-                id="password"
-                {...register("password", {
-                  required: {
-                    value: true,
-                    message: "Must enter a password",
-                  },
-                })}
-                onChange={(e) => {
-                  register("password").onChange(e);
-                  handleClearErrors();
-                }}
-              ></input>
-              {errors.password ? (
-                <p className="alert alert-danger">{errors.password?.message}</p>
-              ) : null}
-              {authState.error ? (
-                <p className="alert alert-danger">{authState.error}</p>
-              ) : null}
-            </div>
-
-            <button className="btn btn-success">Submit</button>
-
-            <h3 className="mt-3">or:</h3>
-
-            <div className="mb-3 mt-3 alert alert-info">
-              <Link to="/signup">Create a new Account</Link>
-            </div>
-          </form>
-        </div>
+      {/* password */}
+      <div>
+        <label htmlFor="password" className="block text-sm md:text-base mb-1 font-medium text-gray-700">
+          Password
+        </label>
+        <input
+          {...register("password")}
+          className="w-full px-4 py-2 border rounded-lg text-sm md:text-base focus:ring-2 focus:ring-blue-500"
+        />
       </div>
+
+      {/* Submit */}
+      <button
+        type="submit"
+        className="w-full bg-blue-600 text-white py-2 rounded-lg text-sm md:text-base hover:bg-blue-700 transition"
+      >
+        Sign In
+      </button>
+    </form>
+
+    <div className="mt-6 text-center">
+      <p className="text-gray-600">or</p>
+      <button
+        onClick={() => navigate("/signup")}
+        className="mt-2 inline-flex items-center gap-2 text-blue-600 hover:underline text-sm md:text-base"
+      >
+        <FaUserPlus />
+        Create a new user
+      </button>
     </div>
+  </div>
+</div>
   );
 }

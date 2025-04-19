@@ -23,7 +23,19 @@ mongoose
 const app = express();
 
 app.use((req, res, next) => {
-  res.header("Access-Control-Allow-Origin", "https://momentumhub.onrender.com");
+  const allowedOrigins = [
+    "https://momentumhub.onrender.com",
+    "http://localhost:5173"
+  ]
+
+  const origin = req.headers.origin
+
+  console.log("REQ HEADER ORIGIN", origin)
+
+  if(allowedOrigins.includes(origin)){
+    res.header("Access-Control-Allow-Origin", origin)
+  }
+
   res.header("Access-Control-Allow-Methods", "GET, PUT, POST, DELETE, PATCH");
   res.header(
     "Access-Control-Allow-Headers",
